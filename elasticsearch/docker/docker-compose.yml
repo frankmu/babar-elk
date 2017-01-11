@@ -1,0 +1,28 @@
+elasticsearch_master: 
+  image: elasticsearch:latest 
+  command: "elasticsearch -Des.cluster.name=babar-elasticsearch -Des.node.master=true -Des.node.data=false" 
+  environment: 
+    - ES_HEAP_SIZE=512m 
+  ports: 
+    - "9200:9200" 
+    - "9300:9300"
+
+elasticsearch_node1: 
+  image: elasticsearch:latest 
+  command: "elasticsearch -Des.cluster.name=babar-elasticsearch -Des.discovery.zen.ping.unicast.hosts=elasticsearch_master" 
+  links: 
+    - elasticsearch_master 
+  volumes: 
+    - "/opt/elasticsearch/data" 
+  environment: 
+    - ES_HEAP_SIZE=512m 
+
+elasticsearch_node2: 
+  image: elasticsearch:latest 
+  command: "elasticsearch -Des.cluster.name=babar-elasticsearch -Des.discovery.zen.ping.unicast.hosts=elasticsearch_master" 
+  links: 
+    - elasticsearch_master 
+  volumes: 
+    - "/opt/elasticsearch/data" 
+  environment: 
+    - ES_HEAP_SIZE=512m
