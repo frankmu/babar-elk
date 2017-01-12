@@ -1,28 +1,36 @@
-elasticsearch_master: 
-  image: elasticsearch:latest 
-  command: "elasticsearch -Des.cluster.name=babar-elasticsearch -Des.node.master=true -Des.node.data=false" 
-  environment: 
-    - ES_HEAP_SIZE=512m 
-  ports: 
-    - "9200:9200" 
-    - "9300:9300"
+version: '2'
+services:
+  elasticsearch1:
+    image: elasticsearch:latest
+    container_name: elasticsearch1
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - esdata1:/opt/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+  elasticsearch2:
+    image: elasticsearch:latest
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch1"
+    volumes:
+      - esdata2:/opt/elasticsearch/data
+    networks:
+      - esnet
 
-elasticsearch_node1: 
-  image: elasticsearch:latest 
-  command: "elasticsearch -Des.cluster.name=babar-elasticsearch -Des.discovery.zen.ping.unicast.hosts=elasticsearch_master" 
-  links: 
-    - elasticsearch_master 
-  volumes: 
-    - "/opt/elasticsearch/data" 
-  environment: 
-    - ES_HEAP_SIZE=512m 
+volumes:
+  esdata1:
+    driver: local
+  esdata2:
+    driver: local
 
-elasticsearch_node2: 
-  image: elasticsearch:latest 
-  command: "elasticsearch -Des.cluster.name=babar-elasticsearch -Des.discovery.zen.ping.unicast.hosts=elasticsearch_master" 
-  links: 
-    - elasticsearch_master 
-  volumes: 
-    - "/opt/elasticsearch/data" 
-  environment: 
-    - ES_HEAP_SIZE=512m
+networks:
+  esnet:
+    driver: bridge
