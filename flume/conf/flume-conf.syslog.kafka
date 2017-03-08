@@ -1,0 +1,20 @@
+# The configuration file needs to define the sources, 
+# the channels and the sinks.
+# Sources, channels and sinks are defined per agent, 
+# in this case called 'agent'
+
+agent.sources = syslog
+agent.channels = memoryChannel
+agent.sinks = kafkaSink
+
+agent.sources.syslog.type = exec
+agent.sources.syslog.command = tail -F /home/frank/work/test.log
+agent.sources.syslog.channels = memoryChannel
+
+agent.sinks.kafkaSink.type = org.apache.flume.sink.kafka.KafkaSink
+agent.sinks.kafkaSink.kafka.bootstrap.servers = 192.168.1.223:9092
+agent.sinks.kafkaSink.kafka.topic = test
+agent.sinks.kafkaSink.channel = memoryChannel
+
+agent.channels.memoryChannel.type = memory
+agent.channels.memoryChannel.capacity = 10000
