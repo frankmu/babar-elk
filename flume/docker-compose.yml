@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  flume:
+    build: 
+      context: ./flume
+    image: frank/flume
+    container_name: flume
+    environment:
+      FLUME_CONF_FILE: /opt/flume/conf/flume.conf
+      FLUME_AGENT_NAME: agent

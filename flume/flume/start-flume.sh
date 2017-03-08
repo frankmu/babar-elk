@@ -7,7 +7,7 @@ FLUME_CONF_DIR=${FLUME_CONF_DIR:-/opt/flume/conf}
 
 echo "Starting flume agent : ${FLUME_AGENT_NAME}"
 
-flume-ng agent \
+/opt/flume/bin/flume-ng agent \
   -c ${FLUME_CONF_DIR} \
   -f ${FLUME_CONF_FILE} \
   -n ${FLUME_AGENT_NAME} \
