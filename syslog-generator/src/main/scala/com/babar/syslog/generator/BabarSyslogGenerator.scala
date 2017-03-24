@@ -2,8 +2,6 @@ package com.babar.syslog.generator
 
 import akka.actor.{ActorSystem, Props, Actor}
 import scala.concurrent.duration._
-import akka.event.Logging
-import akka.actor.actorRef2Scala
 import org.slf4j.LoggerFactory
 import scala.util.Random
 
