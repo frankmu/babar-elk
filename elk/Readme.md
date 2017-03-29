@@ -1,7 +1,11 @@
-##### Known issue to run elasticsearch in docker on Linux:
+#### Known issue to run elasticsearch in docker on Linux:
 [elasticsearch website](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode)
+#### Error:
+```
+max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+```
 
-##### The fix is here:
+#### The fix is here:
 [stackoverflow](http://stackoverflow.com/questions/40352134/fail-when-start-a-new-container-with-elasticsearch-5-0)
 
 execute this on the host machine:
