@@ -2,6 +2,7 @@ version: '2'
 services:
   elasticsearch1:
     build: elasticsearch/
+    image: frank/elasticsearch
     container_name: elasticsearch1
     environment:
       - cluster.name=docker-cluster
@@ -25,7 +26,7 @@ services:
     networks:
       - esnet
   elasticsearch2:
-    build: elasticsearch/
+    image: frank/elasticsearch
     container_name: elasticsearch2
     environment:
       - cluster.name=docker-cluster
@@ -50,6 +51,8 @@ services:
 
   logstash:
     build: logstash/
+    image: frank/logstash
+    container_name: logstash
     ports:
       - "5000:5000"
     environment:
@@ -61,16 +64,18 @@ services:
       - elasticsearch2
 
   kibana: 
-      build: kibana/
-      ports:
-        - "5601:5601"
-      volumes:
-        - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
-      networks:
-        - esnet
-      depends_on:
-        - elasticsearch1
-        - elasticsearch2
+    build: kibana/
+    image: frank/kibana
+    container_name: kibana  
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      - esnet
+    depends_on:
+      - elasticsearch1
+      - elasticsearch2
 
 volumes:
   esdata1:
