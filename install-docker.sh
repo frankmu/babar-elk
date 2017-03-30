@@ -18,4 +18,6 @@ sudo apt-get install docker-ce
 # add docker user
 sudo groupadd docker
 sudo usermod -aG docker $USER
-docker run hello-world
+echo "Need to Log out and log back in to refresh group membership"
+echo "After re-login, try the follow command:"
+echo "docker run hello-world"
