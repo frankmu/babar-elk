@@ -1,6 +1,7 @@
 input {
-	tcp {
-		port => 5000
+	kafka {
+		bootstrap_servers => "192.168.1.223:9092"
+		topics => ["test"]
 	}
 }
 
