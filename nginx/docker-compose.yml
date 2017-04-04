@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  nginx:
+    build: 
+      context: ./nginx
+    image: frank/nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - elk_esnet
+    external_links:
+      - kibana
+networks:
+    elk_esnet:
+      external: true
