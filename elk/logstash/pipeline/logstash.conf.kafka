@@ -2,15 +2,18 @@ input {
 	kafka {
 		bootstrap_servers => "192.168.1.223:9092"
 		topics => ["test"]
+		type => "kafka-consumer"
 	}
 }
 
 ## Add filters plugins configuration here
 
 output {
-	elasticsearch {
-		hosts => "elasticsearch1:9200"
-		## user => "logstash_internal"
-		## password => "changeme"
+	if [type] == "kafka-consumer" {
+		elasticsearch {
+			hosts => "elasticsearch1:9200"
+			## user => "logstash_internal"
+			## password => "changeme"
+		}
 	}
 }
