@@ -1,0 +1,8 @@
+filebeat.prospectors:
+ - input_type: log
+   paths:
+     - /tmp/testFile.log
+
+output.kafka:
+   hosts: ["192.168.1.223:9092"]
+   topic: 'test'
