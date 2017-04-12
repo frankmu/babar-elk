@@ -7,6 +7,7 @@ import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.Source
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.{ByteArraySerializer, StringSerializer}
+import com.example.reader.FileReader
 
 /**
   * Created by marksu on 8/31/16.
@@ -19,7 +20,7 @@ object PlainSinkProducerMain extends App {
   val producerSettings = ProducerSettings(system, new ByteArraySerializer, new StringSerializer)
     .withBootstrapServers("192.168.1.223:9092")
 
-  val done = Source(1 to 10)
+  val done = FileReader.readContinuously("/tmp/testFile.log", "UTF-8")
     .map(_.toString)
     .map { elem =>
       println(s"PlainSinkProducer produce: ${elem}")
