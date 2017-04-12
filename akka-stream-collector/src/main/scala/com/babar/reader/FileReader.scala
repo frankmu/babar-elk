@@ -1,4 +1,4 @@
-package com.example.reader
+package com.babar.reader
 
 import java.nio.file.Paths
 import java.nio.file.Files
@@ -18,7 +18,7 @@ object FileReader {
     * @return Either an error or the source.
     */
   def readContinuously[T](path: String, encoding: String): Source[String, _] = 
-    Source.queue[String](bufferSize = 1000, OverflowStrategy.fail).
+    Source.queue[String](bufferSize = 10000, OverflowStrategy.fail).
       mapMaterializedValue { queue =>
         Tailer.create(Paths.get(path).toFile, new TailerListenerAdapter {
           override def handle(line: String): Unit = {

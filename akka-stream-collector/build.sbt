@@ -1,4 +1,4 @@
-name := """log-collector"""
+name := """akka-stream-collector"""
 
 version := "1.0"
 

@@ -1,4 +1,4 @@
-package com.example.producer
+package com.babar.producer
 
 import akka.actor.ActorSystem
 import akka.kafka.ProducerSettings
@@ -7,7 +7,7 @@ import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.Source
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.{ByteArraySerializer, StringSerializer}
-import com.example.reader.FileReader
+import com.babar.reader.FileReader
 
 /**
   * Created by marksu on 8/31/16.
