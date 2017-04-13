@@ -8,7 +8,9 @@ import akka.stream.scaladsl.Source
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.{ByteArraySerializer, StringSerializer}
 import com.typesafe.config.ConfigFactory
-import com.babar.reader.FileReader
+import java.nio.file.Paths
+import akka.util.ByteString
+import akka.stream.scaladsl._
 
 object PlainSinkProducerMain extends App {
 
@@ -19,8 +21,9 @@ object PlainSinkProducerMain extends App {
   val producerSettings = ProducerSettings(system, new ByteArraySerializer, new StringSerializer)
     .withBootstrapServers(config.getString("app.kafka.host") + ":" + config.getString("app.kafka.port"))
 
-  val done = FileReader.readContinuously(config.getString("app.file.path"), "UTF-8")
-    .map(_.toString)
+  FileIO.fromPath(Paths.get(config.getString("app.file.path")))
+    .via(Framing.delimiter(ByteString(System.lineSeparator), maximumFrameLength = 512, allowTruncation = true))
+    .map(_.utf8String)
     .map { elem =>
       println(s"PlainSinkProducer produce: ${elem}")
       new ProducerRecord[Array[Byte], String](config.getString("app.kafka.topic"), elem)
