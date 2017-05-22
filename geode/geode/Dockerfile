@@ -18,12 +18,4 @@ RUN	yum install -y wget which tar git java-1.8.0-openjdk-devel \
 ENV GEODE_HOME /incubator-geode/geode-assembly/build/install/apache-geode
 ENV PATH $PATH:$GEODE_HOME/bin
 
-# Default ports:
-# RMI/JMX 1099
-# REST 8080
-# PULE 7070
-# LOCATOR 10334
-# CACHESERVER 40404
-EXPOSE  8080 10334 40404 1099 7070
 VOLUME ["/data/"]
-CMD ["gfsh"]
