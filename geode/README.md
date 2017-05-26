@@ -30,3 +30,13 @@ docker-compose scale server=3
 ```
 
 This will start 2 extra Geode server containers. You can verify this step by repeating the last GFSH step and listing the members.
+
+# Install in Ubuntu 16.04
+run install_geode.sh and use gfsh to start locator/server, create region
+```
+$ gfsh 
+gfsh> start locator
+gfsh> start server
+gfsh> create region --name=hello --type=REPLICATE 
+```
+
