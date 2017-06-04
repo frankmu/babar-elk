@@ -1,3 +1,5 @@
+name: "babar-filebeat"
+tags: ["syslog", "hello-world"]
 filebeat.prospectors:
  - input_type: log
    paths:
