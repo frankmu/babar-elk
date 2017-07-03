@@ -7,4 +7,4 @@ filebeat.prospectors:
 
 output.kafka:
    hosts: ["192.168.1.223:9092"]
-   topic: 'test'
+   topic: 'replicate'
