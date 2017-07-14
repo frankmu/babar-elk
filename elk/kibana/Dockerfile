@@ -1,4 +1,4 @@
-From docker.elastic.co/kibana/kibana:5.2.2
+From docker.elastic.co/kibana/kibana:5.5.0
 
 # Add your kibana plugins setup here
 # Example: RUN kibana-plugin install <name|url>
