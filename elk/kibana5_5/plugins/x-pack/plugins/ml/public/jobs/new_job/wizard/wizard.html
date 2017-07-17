@@ -1,0 +1,46 @@
+<ml-nav-menu name="new_job"></ml-nav-menu>
+<ml-new-job>
+  <ml-message-bar></ml-message-bar>
+  <div ng-controller="MlNewJobWizard" class="container">
+    <!-- first view of wizard -->
+    <div ng-show="ui.wizard.step === 0" class="wizard-step-0">
+      <div>
+
+        <div ng-mouseenter="ui.wizard.stepHovering=1" ng-mouseleave="ui.wizard.stepHovering=0" ng-click="ui.wizard.setJobMode('jobs/new_job/simple/single_metric')" >
+          <label class="data-location">
+            <div class="ml-round-number" ng-class="{'ml-round-number-pop':ui.wizard.stepHovering===1}">
+              <i aria-hidden="true" class="fa fa-area-chart"></i>
+            </div>
+            <div>
+              <div>Create a single metric job</div>
+              <div>Based on a kibana index pattern or saved search</div>
+            </div>
+          </label>
+        </div>
+        <div ng-mouseenter="ui.wizard.stepHovering=2" ng-mouseleave="ui.wizard.stepHovering=0" ng-click="ui.wizard.setJobMode('jobs/new_job/simple/multi_metric')" >
+          <label class="data-location">
+            <div class="ml-round-number" ng-class="{'ml-round-number-pop':ui.wizard.stepHovering===2}">
+              <i aria-hidden="true" class="fa fa-area-chart"></i>
+            </div>
+            <div>
+              <div>Create a multi metric job</div>
+              <div>Based on a kibana index pattern or saved search</div>
+            </div>
+          </label>
+        </div>
+        <div ng-mouseenter="ui.wizard.stepHovering=3" ng-mouseleave="ui.wizard.stepHovering=0" ng-click="ui.wizard.setJobMode('jobs/new_job/advanced')" >
+          <label class="data-location">
+            <div class="ml-round-number" ng-class="{'ml-round-number-pop':ui.wizard.stepHovering===3}">
+              <i aria-hidden="true" class="fa fa-cog"></i>
+            </div>
+            <div>
+              <div>Create an advanced job</div>
+              <div>Advanced configuration options for creating a job</div>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ml-new-job>

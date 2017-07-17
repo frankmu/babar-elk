@@ -1,0 +1,15 @@
+{
+  "author": {
+    "name": "Elasticsearch",
+    "company": "Elasticsearch BV"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "name": "monitoring",
+  "version": "5.5.0",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/elasticsearch/x-pack.git"
+  }
+}

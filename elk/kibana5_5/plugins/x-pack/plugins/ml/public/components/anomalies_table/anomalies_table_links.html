@@ -1,0 +1,19 @@
+<div class="dropdown-group" dropdown >
+  <span class="dropdown-toggle" dropdown-toggle>
+    Open link  <span class="caret"></span>
+  </span>
+  <ul class="dropdown-menu" role="menu">
+    <li ng-repeat="customUrl in customUrls"><a ng-click="openCustomUrl(customUrl, source)">
+    	{{customUrl.url_name}}
+    	<i class="fa fa-external-link" aria-hidden="true"></i></a>
+    </li>
+    <li ng-if="showViewSeriesLink"><a ng-click="viewSeries(source)">
+    	View series
+    	<i class="fa fa-external-link" aria-hidden="true"></i></a>
+    </li>
+    <li ng-if="showViewExamplesLink"><a ng-click="viewExamples(source)">
+      View examples
+      <i class="fa fa-external-link" aria-hidden="true"></i></a>
+    </li>
+  </ul>
+</div>

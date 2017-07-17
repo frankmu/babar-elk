@@ -1,0 +1,57 @@
+@md_size_screen: 980px;
+
+monitoring-main {
+  .navbar {
+    min-height: 0;
+  }
+}
+
+.monitoring-view {
+  &.no-padding {
+    padding: 0;
+  }
+
+  .table > thead > tr > th {
+    border-bottom: 2px solid @esVeryLightGray;
+  }
+
+  .table > tbody > tr > th,
+  .table > tfoot > tr > th,
+  .table > thead > tr > td,
+  .table > tbody > tr > td,
+  .table > tfoot > tr > td,
+  .table.table-condensed > tbody > tr > th,
+  .table.table-condensed > tfoot > tr > th,
+  .table.table-condensed > thead > tr > td,
+  .table.table-condensed > tbody > tr > td,
+  .table.table-condensed > tfoot > tr > td {
+    border-color: @esLightGray;
+  }
+
+  .table {
+    margin-bottom: 0;
+  }
+
+  th {
+    font-weight: normal;
+  }
+
+  .offline {
+    color: @esDarkGray;
+  }
+}
+
+  .monitoring-tooltip__trigger,
+  .monitoring-tooltip__trigger:hover {
+    // override code in pui-react-tooltip that forces the color to be blue
+    color: @esDarkerGray;
+  }
+
+  .monitoring-view-listing-table {
+    border-bottom: 1px solid @esLightGray;
+  }
+
+// match style of kbn-tooltip
+.pui-tooltip-inner {
+  font-size: 12px;
+}

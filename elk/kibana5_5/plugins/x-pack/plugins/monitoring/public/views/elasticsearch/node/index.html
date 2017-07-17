@@ -1,0 +1,35 @@
+<div ng-controller="esNode">
+  <monitoring-main
+    product="elasticsearch"
+    name="nodes"
+    instance="{{ pageData.nodeSummary.name }}"
+    resolver="{{ pageData.nodeSummary.resolver }}"
+    page="overview"
+  >
+    <div class="details monitoring-view">
+      <monitoring-node-summary node="pageData.nodeSummary"></monitoring-node-summary>
+      <div class="detail-metrics monitoring-element">
+        <div class="row monitoring-element" ng-if="pageData.metrics">
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.node_jvm_mem"></monitoring-chart></div>
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.node_mem"></monitoring-chart></div>
+        </div>
+        <div class="row monitoring-element" ng-if="pageData.metrics">
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.node_cpu_metric"></monitoring-chart></div>
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.node_load_average"></monitoring-chart></div>
+        </div>
+        <div class="row monitoring-element" ng-if="pageData.metrics">
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.node_latency"></monitoring-chart></div>
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.node_segment_count"></monitoring-chart></div>
+        </div>
+      </div>
+      <monitoring-shard-allocation
+        view="node"
+        nodes="pageData.nodes"
+        shards="pageData.shards"
+        shard-stats="pageData.shardStats"
+        show-system-indices="showSystemIndices"
+        toggle-show-system-indices="toggleShowSystemIndices"
+      ></monitoring-shard-allocation>
+    </div>
+  </monitoring-main>
+</div>

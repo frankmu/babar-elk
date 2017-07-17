@@ -1,0 +1,68 @@
+<div class='ml-job-selector'>
+  <div class="ml-select-all-controls">
+    <div>
+      <input ng-if="singleSelection !== true" type="checkbox"
+        ng-checked="selections.length === selectableJobs.length"
+        ng-click="toggleAllSelection()" />
+      <input ng-if="singleSelection === true" style="visibility:hidden;" type="checkbox" />
+        Job Id
+    </div>
+    <div>
+      Time Range
+    </div>
+  </div>
+
+  <div ng-show='noJobsCreated===undefined' style='text-align: center;'>
+    <div class="loading-jobs"><i class='fa fa-spinner fa-spin'></i></div>
+    <div>Loading Jobs</div>
+  </div>
+  <div class="ml-select-list">
+    <div class='job-row' ng-repeat="job in jobs">
+      <div class='job-row-inner'>
+      <label>
+        <div>
+          <span>
+            <input ng-if="singleSelection !== true" type="checkbox"
+              value="{{job.id}}"
+              ng-checked="isSelected(job.id)"
+              ng-disabled='job.disabled'
+              ng-click="toggleSelection(job.id)" />
+            <input ng-if="singleSelection === true" type="radio"
+              value="{{job.id}}"
+              ng-model="selections[0]"
+              ng-disabled='job.disabled' />
+            <span ng-class="{'disabled-job': job.disabled}">{{job.id}}</span>
+          </span>
+        </div>
+        <div>
+          <div class='gant-back-edge' >
+            <div ></div>
+          </div>
+          <div
+            class='gant-bar'
+            ng-class="{'disabled-job': job.disabled, 'gant-bar-running': job.running}"
+            tooltip='{{job.timeRange.label}}'
+            tooltip-placement="bottom"
+            tooltip-append-to-body="true"
+            ng-attr-style='margin-left:{{job.timeRange.fromPx}}px; width: {{job.timeRange.widthPx}}px;'>
+
+          </div>
+        </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class='apply-time-range'>
+    <label>
+      <input type="checkbox"
+        ng-model="applyTimeRange"/>
+        Also apply time range
+    </label>
+  </div>
+  <div class='buttons-container'>
+    <button ng-click="apply()"  class="kuiButton kuiButton--primary" aria-label="Apply">Apply</button>
+    <button ng-click="closePopover()" class="kuiButton kuiButton--primary" aria-label="Cancel">Cancel</button>
+  </div>
+
+</div>

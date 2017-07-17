@@ -1,0 +1,34 @@
+<div ng-controller="esIndex">
+  <monitoring-main
+    product="elasticsearch"
+    name="indices"
+    instance="{{ indexName }}"
+    resolver="{{ indexName }}"
+    page="overview"
+  >
+    <div class="details monitoring-view">
+      <monitoring-index-summary summary="pageData.indexSummary"></monitoring-index-summary>
+      <div class="detail-metrics monitoring-element">
+        <div class="row monitoring-element" ng-if="pageData.metrics">
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.index_mem"></monitoring-chart></div>
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.index_size"></monitoring-chart></div>
+        </div>
+        <div class="row monitoring-element" ng-if="pageData.metrics">
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.index_search_request_rate"></monitoring-chart></div>
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.index_request_rate"></monitoring-chart></div>
+        </div>
+        <div class="row monitoring-element" ng-if="pageData.metrics">
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.index_segment_count"></monitoring-chart></div>
+          <div class="col-md-6"><monitoring-chart series="pageData.metrics.index_document_count"></monitoring-chart></div>
+        </div>
+      </div>
+      <monitoring-shard-allocation
+        id="indexName"
+        view="index"
+        nodes="pageData.nodes"
+        shards="pageData.shards"
+        shard-stats="pageData.shardStats"
+      ></monitoring-shard-allocation>
+    </div>
+  </monitoring-main>
+</div>

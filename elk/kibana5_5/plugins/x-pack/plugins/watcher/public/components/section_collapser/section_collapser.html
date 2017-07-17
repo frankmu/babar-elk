@@ -1,0 +1,21 @@
+<div
+  class="sectionCollapser"
+  ng-class="{ collapsed: sectionCollapser.isCollapsed, expanded: !sectionCollapser.isCollapsed }"
+  ng-click="sectionCollapser.toggle()"
+>
+  <div class="sectionCollapserButtons">
+    <button
+      class="kuiButton kuiButton--hollow"
+      ng-if="!sectionCollapser.isCollapsed"
+    >
+      <span class="kuiButton__icon kuiIcon fa-caret-down"></span>
+    </button>
+    <button
+      class="kuiButton kuiButton--hollow"
+      ng-if="sectionCollapser.isCollapsed"
+    >
+      <span class="kuiButton__icon kuiIcon fa-caret-right"></span>
+    </button>
+  </div>
+  <div class="sectionCollapserLiner" ng-transclude></div>
+</div>

@@ -1,0 +1,112 @@
+<kbn-management-app
+  section="elasticsearch/watcher/watch"
+  omit-breadcrumb-pages="['watch']"
+>
+  <div class="kuiViewContent kuiViewContent--constrainedWidth">
+    <div class="kuiViewContentItem kuiVerticalRhythm">
+      <watch-edit-title-bar
+        xpack-watch="watchEdit.watch"
+        is-watch-valid="watchEdit.isValid"
+        on-watch-delete="watchEdit.onWatchDelete"
+        on-watch-save="watchEdit.onWatchSave"
+        on-close="watchEdit.onClose"
+      ></watch-edit-title-bar>
+    </div>
+
+    <div class="kuiViewContentItem kuiVerticalRhythm">
+      <kbn-tabs
+        selected-tab-id="watchEdit.selectedTabId"
+        on-tab-select="watchEdit.onTabSelect"
+      >
+        <kbn-tab
+          tab-id="edit-watch"
+          title="Edit Watch"
+        >
+          Edit
+        </kbn-tab>
+        <kbn-tab
+          tab-id="watch-simulate"
+          title="Simulate Watch"
+        >
+          Simulate
+        </kbn-tab>
+        <kbn-tab
+          tab-id="simulate-results"
+          title="Simulate Results"
+          ng-if="watchEdit.simulateResults"
+        >
+          Simulation Results
+        </kbn-tab>
+      </kbn-tabs>
+    </div>
+
+    <div
+      class="kuiViewContentItem kuiVerticalRhythm"
+      ng-show="watchEdit.selectedTabId === 'edit-watch'"
+    >
+      <watch-edit-detail
+        xpack-watch="watchEdit.watch"
+        on-watch-change="watchEdit.onWatchChange"
+        on-valid="watchEdit.onValid"
+        on-invalid="watchEdit.onInvalid"
+      ></watch-edit-detail>
+    </div>
+
+    <div
+      class="kuiViewContentItem kuiVerticalRhythm"
+      ng-show="watchEdit.selectedTabId === 'watch-simulate'"
+    >
+      <div class="kuiVerticalRhythm">
+        <watch-edit-execute-info-panel></watch-edit-execute-info-panel>
+      </div>
+
+      <div class="kuiVerticalRhythm">
+        <watch-edit-execute-detail
+          xpack-watch="watchEdit.watch"
+          previous-watch-history-item="watchEdit.simulateResults"
+          on-change="watchEdit.executeDetailsChange"
+          on-valid="watchEdit.onExecuteDetailsValid"
+          on-invalid="watchEdit.onExecuteDetailsInvalid"
+        ></watch-edit-execute-detail>
+      </div>
+
+      <div class="kuiVerticalRhythm">
+        <button
+          class="kuiButton kuiButton--primary kuiButton--iconText"
+          ng-disabled="!watchEdit.isExecuteValid"
+          ng-click="watchEdit.onWatchExecute()"
+        >
+          <span class="kuiButton__icon kuiIcon fa-play"></span>
+          Simulate Watch
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="kuiViewContentItem kuiVerticalRhythm"
+      ng-show="watchEdit.selectedTabId === 'simulate-results'"
+    >
+      <div class="kuiVerticalRhythm">
+        <watch-edit-watch-execute-summary
+          watch-history-item="watchEdit.simulateResults"
+        ></watch-edit-watch-execute-summary>
+      </div>
+
+      <div class="kuiVerticalRhythm">
+        <watch-edit-actions-execute-summary
+          xpack-watch="watchEdit.watch"
+          execute-details="watchEdit.executeDetails"
+          watch-history-item="watchEdit.simulateResults"
+        ></watch-edit-actions-execute-summary>
+      </div>
+
+      <div class="kuiVerticalRhythm">
+        <label>Simulation Output:</label>
+        <watch-history-item-detail
+          watch-history-item="watchEdit.simulateResults"
+        ></watch-history-item-detail>
+      </div>
+    </div>
+
+  </div>
+</kbn-management-app>

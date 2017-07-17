@@ -1,0 +1,68 @@
+<div class="elastic-data-description-container">
+  <div ng-show="ui.esServerOk === 1">
+
+    <div class="form-group">
+      <div><label><input type="radio" name="indexRadio" ng-model="ui.wizard.indexInputType" value="TEXT" /> Input index</label></div>
+      <div><label><input type="radio" name="indexRadio" ng-model="ui.wizard.indexInputType" value="LIST" /> Choose index from list</label></div>
+    </div>
+
+    <!-- text input index list -->
+    <div ng-show="ui.wizard.indexInputType === 'TEXT'" class="form-group">
+      <label>Index</label>
+      <div class="input-group">
+      <input
+        ng-model="ui.datafeed.indicesText"$
+        placeholder=""
+        class="form-control"
+        ng-change="extractFields()"
+        aria-describedby="index-text-status"
+        list='index_datalist' />
+        <span class="input-group-addon" id="index-text-status">
+          <i ng-show="ui.indexTextOk === true" aria-hidden="true" style='color:green;' class="fa fa-check"></i>
+          <i ng-show="ui.indexTextOk === false" aria-hidden="true" style='color:red;' class="fa fa-remove"></i>
+        </span>
+        <datalist id="index_datalist">
+          <option ng-repeat="(key, value) in ui.sortByKey(ui.indices)" >{{key}}</option>
+        </datalist>
+      </div>
+    </div>
+
+    <!-- checkbox index list -->
+    <div ng-show="ui.wizard.indexInputType === 'LIST'" class="form-group">
+      <label>Indices</label>
+      <div>
+        <div class="index-list-container">
+          <div class="checkbox" ng-repeat="(key, value) in ui.sortByKey(ui.indices) | filterIndices" >
+            <label><input type="checkbox" ng-checked="indices[key] !== undefined" ng-click="toggleIndex(key, value)" >{{key}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- checkbox index list -->
+    <div ng-show="ui.indexTextOk" class="form-group">
+      <label>Types</label>
+      <div>
+        <div class="types-list-container">
+          <div class="checkbox all_types" ng-show="(uiTypeKeys().length > 1)"><label><input type="checkbox" ng-checked="allTypesSelected()" ng-click="toggleAllTypes()" >All types</label></div>
+          <div ng-class="{checkbox: (uiTypeKeys().length > 1)}" ></div>
+          <div class="checkbox" ng-repeat="(key, value) in ui.types" >
+            <label><input type="checkbox" ng-checked="types[key] !== undefined" ng-click="toggleTypes(key, value)" >{{key}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div ng-show="ui.indexTextOk" class="form-group">
+      <label>Time-field name</label>
+      <select
+        ng-model="data_description.time_field"
+        class="form-control">
+        <option ng-repeat="(key, value) in dateProperties">{{key}}</option>
+      </select>
+    </div>
+
+  </div>
+
+</div>
