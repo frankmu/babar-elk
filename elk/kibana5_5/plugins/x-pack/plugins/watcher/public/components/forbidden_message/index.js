@@ -1,1 +1,0 @@
-import './forbidden_message';

@@ -1,1 +1,0 @@
-import './watches_service.factory';
