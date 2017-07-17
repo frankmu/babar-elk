@@ -1,0 +1,208 @@
+<ml-nav-menu name="new_job_single_metric"></ml-nav-menu>
+<ml-new-job-single-metric>
+  <ml-message-bar></ml-message-bar>
+  <div ng-controller="MlCreateSingleMetricJob" class="single-metric-job-container">
+    <div class="row">
+      <div class="col-md-6"><h3>New job from {{ui.pageTitle}}</h3></div>
+      <div class="col-md-6">
+        <div class="pull-right">
+          <span style="font-size:10px;" ng-show="formConfig.chartInterval !== undefined">Chart interval: {{formConfig.chartInterval.getInterval().expression}}</span>
+          <button
+            aria-label="Create Job"
+            ng-click="setFullTimeRange()"
+            type="button"
+            ng-disabled="jobState === JOB_STATE.RUNNING  || jobState === JOB_STATE.STOPPING || jobState === JOB_STATE.FINISHED"
+            class="kuiButton kuiButton--primary">
+              Use full {{ui.indexPatternId}} data
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-controls">
+
+      <div class="form-group col-md-4">
+        <label>Aggregation</label><i ml-info-icon="new_job_detector_function"></i>
+        <select
+          ng-model="formConfig.agg.type"
+          ng-options="agg as agg.title for agg in ui.aggTypeOptions"
+          ng-change="aggChange()"
+          ng-disabled="jobState === JOB_STATE.RUNNING  || jobState === JOB_STATE.STOPPING || jobState === JOB_STATE.FINISHED"
+          class="form-control">
+        </select>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label>Field</label><i ml-info-icon="new_job_detector_fieldname_subset" ></i>
+        <select
+          ng-model="formConfig.field"
+          ng-options="field as field.name for field in ui.fields"
+          ng-change="fieldChange()"
+          ng-disabled="jobState === JOB_STATE.RUNNING || jobState === JOB_STATE.STOPPING || jobState === JOB_STATE.FINISHED"
+          class="form-control">
+        </select>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label>Bucket span</label><i ml-info-icon="new_job_bucketspan" ></i>
+        <div class='bucket-span-container'>
+          <input
+            ng-model="formConfig.bucketSpan"
+            required
+            placeholder={{formConfig-bucketSpan}}
+            ng-disabled="jobState === JOB_STATE.RUNNING  || jobState === JOB_STATE.STOPPING || jobState === JOB_STATE.FINISHED || ui.bucketSpanEstimator.status===1"
+            ng-change="bucketSpanFieldChange()"
+            ng-class='{"ng-invalid": (!ui.bucketSpanValid)}'
+            class="form-control lowercase bucket-span-input" />
+
+          <button class="kuiButton kuiButton--primary navbar-btn-link btn-load-vis"
+            ng-click="loadVis()"
+            ng-disabled="ui.formValid === false || jobState === JOB_STATE.RUNNING || jobState === JOB_STATE.STOPPING || jobState === JOB_STATE.FINISHED" >
+            <i class="fa fa-play" ></i>
+          </button>
+          <div class='bucket-span-estimator'>
+            <ml-bucket-span-estimator form-config='formConfig' job-state-wrapper='{jobState:jobState}' job-state='JOB_STATE' ui='ui'></ml-bucket-span-estimator>
+          </div>
+        </div>
+        <div ng-hide="ui.bucketSpanValid" class="validation-error">Invalid interval format</div>
+        <div ng-show="ui.bucketSpanEstimator.status===-1" class="validation-error">{{ui.bucketSpanEstimator.message}}</div>
+      </div>
+    </div>
+    <div class="row form-controls" ng-show='ui.isCountOrSum'>
+      <div class="col-md-12">
+        <label class='kuiCheckBoxLabel kuiVerticalRhythm'>
+          <input type="checkbox"
+            class='kuiCheckBox'
+            ng-disabled="ui.formValid === false || jobState === JOB_STATE.RUNNING || jobState === JOB_STATE.STOPPING || jobState === JOB_STATE.FINISHED"
+            ng-model  ="formConfig.isSparseData" />
+            <span class='kuiCheckBoxLabel__text'>Sparse data</span> <i ml-info-icon="new_job_sparsedata" ></i>
+        </label>
+      </div>
+    </div>
+
+    <div ng-show="ui.showJobInput">
+      <div class='chart-container'>
+        <ml-single-metric-job-chart
+          chart-data="chartData"
+          chart-height='ui.chartHeight'
+          chart-ticks-margin="chartData.chartTicksMargin">
+        </ml-single-metric-job-chart>
+
+        <div ng-show="chartState === CHART_STATE.NOT_STARTED || chartState === CHART_STATE.LOADING || chartState === CHART_STATE.NO_RESULTS"
+          class='chart-loader'
+          style='height: {{ui.chartHeight}}px; margin-top: -{{ui.chartHeight + 35}}px; margin-left: {{chartData.chartTicksMargin.width - 1}}px;'>
+            <div class='status-label' ng-show="chartState === CHART_STATE.NOT_STARTED"></div>
+            <div class='status-label' ng-show="chartState === CHART_STATE.LOADING">
+              <h2><i class='fa fa-spinner fa-spin'></i></h2>
+            </div>
+            <div class='status-label' ng-show="chartState === CHART_STATE.NO_RESULTS">
+              <div class='no-results'>
+                <h4><i class="fa fa-info-circle"></i> No results found</h4>
+                <span>Consider using the <a ng-click="setFullTimeRange()">full {{ui.indexPatternId}} data</a></span>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div ng-show="ui.showJobInput && (jobState === JOB_STATE.NOT_STARTED || jobState === JOB_STATE.RUNNING || jobState === JOB_STATE.STOPPING)">
+      <div class="form-group">
+        <label>Name</label><i ml-info-icon="new_job_id" ></i>
+        <input
+          ng-model="formConfig.jobId"
+          required
+          placeholder="Job ID"
+          ng-change="changeJobIDCase()"
+          ng-disabled="jobState === JOB_STATE.RUNNING  || jobState === JOB_STATE.STOPPING || jobState === JOB_STATE.FINISHED"
+          input-focus
+          class="form-control lowercase" />
+          <div ng-hide="ui.validation.checks.jobId.valid" class="validation-error">{{ ( ui.validation.checks.jobId.message || "Enter a name for the job" ) }}</div>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label><i ml-info-icon="new_job_description" ></i>
+        <input
+          ng-model="formConfig.description"
+          placeholder="Job description"
+          ng-disabled="jobState === JOB_STATE.RUNNING  || jobState === JOB_STATE.STOPPING || jobState === JOB_STATE.FINISHED"
+          input-focus
+          class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <div ng-click="ui.showAdvanced = !ui.showAdvanced" class="advanced-button-container">
+          <button
+            aria-label="{{ ui.showAdvanced ? 'Hide Advanced' : 'Show Advanced' }}"
+            type="button"
+            ng-disabled="formConfig.useDedicatedIndex"
+            class="kuiButton kuiButton--hollow advanced-button">
+            <i aria-hidden="true" ng-class="{ 'fa-caret-down': ui.showAdvanced, 'fa-caret-right': !ui.showAdvanced }" class="fa"></i>
+          </button>
+          <label>Advanced</label><i ml-info-icon="new_job_advanced_settings" ></i>
+        </div>
+        <div class='advanced-group' ng-show="ui.showAdvanced">
+          <label class='kuiCheckBoxLabel kuiVerticalRhythm'>
+            <input type="checkbox"
+              class='kuiCheckBox'
+              ng-model  ="formConfig.useDedicatedIndex" />
+              <span class='kuiCheckBoxLabel__text'>Use dedicated index</span> <i ml-info-icon="new_job_dedicated_index" ></i>
+          </label>
+        </div>
+      </div>
+
+      <button
+        aria-label="Create Job"
+        ng-click="createJob()"
+        type="button"
+        ng-show="jobState === JOB_STATE.NOT_STARTED"
+        ng-disabled='ui.formValid === false || ui.dirty === true || formConfig.jobId === undefined || ui.bucketSpanValid === false'
+        class="kuiButton kuiButton--primary">
+          Create Job
+      </button>
+
+      <div class='job-state-info' ng-show="jobState === JOB_STATE.RUNNING">Analysis running <i class='fa fa-spinner fa-spin'></i></div>
+      <div class='job-state-info' ng-show="jobState === JOB_STATE.STOPPING">Analysis stopping <i class='fa fa-spinner fa-spin'></i></div>
+
+      <button
+        aria-label="Stop Job"
+        ng-click="stopJob()"
+        type="button"
+        ng-show="jobState === JOB_STATE.RUNNING || jobState === JOB_STATE.STOPPING"
+        ng-disabled="jobState === JOB_STATE.STOPPING"
+        class="kuiButton kuiButton--danger">
+          {{(jobState === JOB_STATE.STOPPING) ? 'Analysis stopping' : 'Stop analysis' }}
+      </button>
+
+      <a
+        href='{{resultsUrl}}'
+        aria-label="View Results"
+        ng-show="jobState === JOB_STATE.RUNNING || jobState === JOB_STATE.STOPPING"
+        class="kuiButton kuiButton--primary">
+          View Results
+      </a>
+
+    </div>
+    <div ng-show="jobState === JOB_STATE.FINISHED">
+      <h3>Job {{formConfig.jobId }} created</h3>
+
+      <button
+        aria-label="Reset"
+        ng-click="resetJob()"
+        type="button"
+        class="kuiButton kuiButton--primary">
+          Reset
+      </button>
+      <a
+        href='{{resultsUrl}}'
+        aria-label="View Results"
+        class="kuiButton kuiButton--primary">
+          View Results
+      </a>
+
+    </div>
+    <div ng-if='jobState === JOB_STATE.FINISHED'>
+      <hr />
+      <ml-post-save-options job-id='formConfig.jobId' bucket-span='formConfig.bucketSpan'></ml-post-save-options>
+    </div>
+  </div>
+</ml-new-job-single-metric>

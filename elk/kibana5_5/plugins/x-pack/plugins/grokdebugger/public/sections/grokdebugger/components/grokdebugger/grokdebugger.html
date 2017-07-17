@@ -1,0 +1,18 @@
+<kbn-dev-tools-app class="grokdebuggerDevTool">
+  <div class="container">
+    <div class="grokdebugger-container">
+      <event-input on-change="grokdebugger.onRawEventChange"></event-input>
+      <pattern-input on-change="grokdebugger.onPatternChange"></pattern-input>
+      <custom-patterns-input on-change="grokdebugger.onCustomPatternsChange"></custom-patterns-input>
+      <div class="grokdebugger-simulate-button">
+        <button
+          class="btn btn-success"
+          ng-disabled="!grokdebugger.isSimulateEnabled"
+          ng-click="grokdebugger.onSimulateClick()">
+          Simulate
+        </button>
+      </div>
+      <event-output structured-event="grokdebugger.structuredEvent"></event-output>
+    </div>
+  </div>
+</kbn-dev-tools-app>

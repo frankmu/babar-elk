@@ -1,0 +1,27 @@
+.monitoring-summary-status {
+  background-color: @esVeryLightGray;
+  padding: 10px 5px;
+  display: flex;
+
+  * + * {
+    margin-left: 10px;
+  }
+}
+
+.monitoring-summary-status__content {
+  display: flex;
+  flex-grow: 1;
+  > div {
+    align-self: center;
+    padding: 5px;
+  }
+}
+
+.monitoring-summary-status__status-indicator {
+  flex-grow: 2;
+  text-align: right;
+
+  * {
+    display: inline;
+  }
+}

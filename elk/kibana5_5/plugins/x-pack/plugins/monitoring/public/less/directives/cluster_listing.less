@@ -1,0 +1,40 @@
+monitoring-cluster-listing {
+
+  .paginated-table {
+    padding: 8px 20px;
+  }
+
+  .paginated-table .table td,
+  .paginated-table > .table > tbody >  tr > td {
+    a {
+      text-decoration: none
+    }
+  }
+
+  .clusterName {
+    font-size: 22px;
+  }
+
+  .expires {
+    font-size: 14px;
+    color: @esGray;
+  }
+
+  .expired {
+    color: @esRed;
+  }
+
+  tr.basic > td > a,
+  .paginated-table .table tr.basic > td.license > div.expires,
+  tr.basic > td {
+    color: @esLightGray !important;
+  }
+
+  .primary-cluster-indicator {
+    position: relative;
+    bottom: 3px; // push it up for middle-alignment
+    font-size: 60%;
+  }
+
+}
+

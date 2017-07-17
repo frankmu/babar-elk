@@ -1,0 +1,24 @@
+@import (reference) "~ui/styles/variables";
+@import (reference) "~ui/styles/mixins";
+@import (reference) "~ui/styles/theme";
+
+.sectionCollapser {
+  display: block;
+  user-select: none;
+
+  border-bottom: 2px solid @kibanaGray5;
+  margin-bottom: 15px;
+
+  * {
+    cursor: pointer;
+  }
+
+  .sectionCollapserButtons {
+    display: inline-block;
+    width: 25px;
+  }
+
+  .sectionCollapserLiner {
+    display: inline-block;
+  }
+}

@@ -1,0 +1,24 @@
+/*
+ * ELASTICSEARCH CONFIDENTIAL
+ *
+ * Copyright (c) 2017 Elasticsearch BV. All Rights Reserved.
+ *
+ * Notice: this software, and all information contained
+ * therein, is the exclusive property of Elasticsearch BV
+ * and its licensors, if any, and is protected under applicable
+ * domestic and foreign law, and international treaties.
+ *
+ * Reproduction, republication or distribution without the
+ * express written consent of Elasticsearch BV is
+ * strictly prohibited.
+ */
+
+import { once } from 'lodash';
+import esMl from './elasticsearch-ml';
+
+export const getClient = once((server) => {
+  const config = Object.assign({ plugins: [esMl] }, server.config().get('elasticsearch'));
+  const cluster = server.plugins.elasticsearch.createCluster('ml', config);
+
+  return cluster;
+});

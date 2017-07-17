@@ -1,0 +1,63 @@
+{
+  "name": "x-pack",
+  "version": "5.5.0",
+  "author": "Elastic",
+  "dependencies": {
+    "@elastic/datemath": "2.3.0",
+    "@elastic/node-crypto": "0.1.2",
+    "@elastic/node-phantom-simple": "2.2.4",
+    "angular-paging": "2.2.1",
+    "angular-resource": "1.4.9",
+    "angular-sanitize": "1.4.9",
+    "angular-ui-ace": "0.2.3",
+    "angular-ui-bootstrap": "1.2.5",
+    "babel-core": "6.21.0",
+    "babel-preset-es2015": "6.22.0",
+    "babel-runtime": "5.8.38",
+    "bluebird": "3.1.1",
+    "boom": "3.1.1",
+    "clarinet": "0.11.0",
+    "concat-stream": "1.5.1",
+    "d3": "3.5.6",
+    "elasticsearch": "13.0.1",
+    "extract-zip": "1.5.0",
+    "flot-charts": "0.8.3",
+    "font-awesome": "4.4.0",
+    "get-port": "2.1.0",
+    "glob": "6.0.4",
+    "hapi-auth-basic": "4.2.0",
+    "hapi-auth-cookie": "6.1.1",
+    "joi": "6.10.1",
+    "lodash": "3.10.1",
+    "moment": "2.13.0",
+    "moment-duration-format": "1.3.0",
+    "moment-timezone": "0.5.4",
+    "pdfmake": "0.1.18",
+    "pluralize": "3.1.0",
+    "pui-react-overlay-trigger": "7.0.0",
+    "pui-react-tooltip": "7.0.0",
+    "puid": "1.0.5",
+    "queue": "4.0.0",
+    "react": "15.3.2",
+    "react-dom": "15.3.2",
+    "rison-node": "0.3.1",
+    "semver": "5.1.0",
+    "tar-fs": "1.13.0",
+    "tinycolor2": "1.3.0",
+    "ui-select": "0.19.4",
+    "unbzip2-stream": "1.0.9",
+    "uuid": "3.0.1",
+    "venn.js": "0.2.9"
+  },
+  "kibana": {
+    "version": "5.5.0"
+  },
+  "build": {
+    "git": {
+      "count": "2701",
+      "sha": "709358d",
+      "date": "Fri, 30 Jun 2017 14:00:14 -0400"
+    },
+    "date": "Fri Jun 30 2017 23:38:43 GMT+0000 (UTC)"
+  }
+}

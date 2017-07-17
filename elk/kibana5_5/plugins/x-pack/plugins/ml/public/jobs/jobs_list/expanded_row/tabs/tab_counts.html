@@ -1,0 +1,122 @@
+<div ng-controller='TabController'>
+  <div class="row">
+
+    <div class="col-md-6">
+      <div ng-repeat="(key, value) in job">
+        <div ng-switch="key">
+          <div ng-switch-when="data_counts">
+            <div class="ml_sub_heading">Counts</div>
+            <div class='ml_job_section_container'>
+              <div>
+                <ml-job-item ng-repeat="(key1, value1) in value">
+                  <div ng-switch="key1">
+
+                    <div ng-switch-when="input_bytes">
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6" title="{{value1}} bytes">{{formatData(value1)}}</div>
+                      </div>
+                    </div>
+
+                    <div ng-switch-when="earliest_record_timestamp">
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6">{{formatDate(value1)}}</div>
+                      </div>
+                    </div>
+
+                    <div ng-switch-when="latest_record_timestamp">
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6">{{formatDate(value1)}}</div>
+                      </div>
+                    </div>
+
+                    <div ng-switch-when="last_data_time">
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6">{{formatDate(value1)}}</div>
+                      </div>
+                    </div>
+
+                    <div ng-switch-when="latest_empty_bucket_timestamp">
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6">{{formatDate(value1)}}</div>
+                      </div>
+                    </div>
+
+                    <div ng-switch-when="latest_sparse_bucket_timestamp">
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6">{{formatDate(value1)}}</div>
+                      </div>
+                    </div>
+
+                    <div ng-switch-when="missing_field_count"></div>
+
+                    <div ng-switch-default>
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6">{{toLocaleString(value1)}}</div>
+                      </div>
+                    </div>
+
+                  </div>
+                </ml-job-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div ng-repeat="(key, value) in job">
+        <div ng-switch="key">
+          <div ng-switch-when="model_size_stats">
+            <div class="ml_sub_heading">Model size stats</div>
+            <div class='ml_job_section_container'>
+              <div>
+                <ml-job-item ng-repeat="(key1, value1) in value">
+                  <div ng-switch="key1">
+
+                    <div ng-switch-when="model_bytes">
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6" title="{{value1}} bytes">{{formatData(value1)}}</div>
+                      </div>
+                    </div>
+
+                    <div ng-switch-when="log_time">
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6">{{formatDate(value1)}}</div>
+                      </div>
+                    </div>
+
+                    <div ng-switch-when="timestamp">
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6">{{formatDate(value1)}}</div>
+                      </div>
+                    </div>
+
+                    <div ng-switch-default>
+                      <div class="ml_job_row row">
+                        <div class="col-md-6">{{key1}}</div>
+                        <div class="col-md-6">{{toLocaleString(value1)}}</div>
+                      </div>
+                    </div>
+
+                  </div>
+                </ml-job-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

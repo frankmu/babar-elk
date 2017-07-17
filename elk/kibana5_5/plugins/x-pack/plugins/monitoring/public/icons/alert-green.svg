@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-alert-green</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="9" cy="9" r="9"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="18" height="18" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="UI-KIT" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="QuickSummary-NG" transform="translate(-180.000000, -4085.000000)">
+            <g id="Icons" transform="translate(150.000000, 3950.000000)">
+                <g id="Status-Icons" transform="translate(30.000000, 51.000000)">
+                    <g id="icon-alert-green" transform="translate(0.000000, 84.000000)">
+                        <use id="Circle-BG" stroke="#1AAB2F" mask="url(#mask-2)" stroke-width="2" fill="#2ACC43" xlink:href="#path-1"></use>
+                        <path d="M14.1897455,6.50445654 C14.1897455,6.33704563 14.1227811,6.16963471 14.0022453,6.04909886 L13.0915299,5.13838349 C12.970994,5.01784763 12.8035831,4.95088326 12.6361722,4.95088326 C12.4687613,4.95088326 12.3013504,5.01784763 12.1808145,5.13838349 L7.78795214,9.5379423 L5.81919979,7.56249352 C5.69866393,7.44195766 5.53125302,7.37499329 5.3638421,7.37499329 C5.19643119,7.37499329 5.02902028,7.44195766 4.90848442,7.56249352 L3.99776905,8.47320889 C3.87723319,8.59374475 3.81026882,8.76115566 3.81026882,8.92856658 C3.81026882,9.09597749 3.87723319,9.2633884 3.99776905,9.38392426 L7.33259445,12.7187497 C7.45313031,12.8392855 7.62054122,12.9062499 7.78795214,12.9062499 C7.95536305,12.9062499 8.12277396,12.8392855 8.24330982,12.7187497 L14.0022453,6.95981423 C14.1227811,6.83927837 14.1897455,6.67186746 14.1897455,6.50445654 Z" id="" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

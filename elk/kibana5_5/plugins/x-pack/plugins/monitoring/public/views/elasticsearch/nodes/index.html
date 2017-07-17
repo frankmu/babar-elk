@@ -1,0 +1,8 @@
+<div ng-controller="nodes">
+  <monitoring-main product="elasticsearch" name="nodes">
+    <div class="monitoring-nodes monitoring-view">
+      <monitoring-cluster-status-elasticsearch></monitoring-cluster-status-elasticsearch>
+      <monitoring-nodes-listing cluster="cluster" rows="pageData.rows"></monitoring-nodes-listing>
+    </div>
+  </monitoring-main>
+</div>

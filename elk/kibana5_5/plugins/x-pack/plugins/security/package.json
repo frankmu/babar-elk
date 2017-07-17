@@ -1,0 +1,10 @@
+{
+  "name": "security",
+  "version": "5.5.0",
+  "description": "Security plugin for Kibana",
+  "scripts": {
+    "start": "gulp dev",
+    "build": "gulp package",
+    "test": "gulp test"
+  }
+}

@@ -1,0 +1,32 @@
+<div style='display: flex;' class="ml-job-select-btn-container">
+  <div class="ml-job-select-btn-label">Job</div>
+  <div style="flex:0 0 auto;">
+    <div ng-if="selectedJobs.length == 1 && selectedJobs[0].id === '*'"
+            popover-placement="bottom" popover-html-unsafe="{{unsafeHtml}}" popover-append-to-body="false" popover-trigger="click"
+            class="ml-job-select-btn" tooltip="All jobs selected" ng-click='createUnsafeHtml()'>
+      <span class="ml-job-select-btn-text">All jobs</span>
+      <span class="caret"></span>
+    </div>
+
+    <div ng-if="selectedJobs.length == 1 && selectedJobs[0].id !== '*'" popover-placement="bottom"
+            popover-placement="bottom" popover-html-unsafe="{{unsafeHtml}}" popover-append-to-body="false" popover-trigger="click"
+            class="ml-job-select-btn" tooltip="{{selectedJobs[0].id}} selected" ng-click='createUnsafeHtml()'>
+      <span class="ml-job-select-btn-text"><span>{{selectedJobs[0].id}}</span></span>
+      <span class="caret"></span>
+    </div>
+
+    <div ng-if="selectedJobs.length == 2" popover-placement="bottom"
+            popover-placement="bottom" popover-html-unsafe="{{unsafeHtml}}" popover-append-to-body="false" popover-trigger="click"
+            class="ml-job-select-btn" tooltip="{{selectedJobs[0].id}} and 1 other job selected" ng-click='createUnsafeHtml()'>
+      <span class="ml-job-select-btn-text"><span>{{selectedJobs[0].id}}</span> and 1 other</span>
+      <span class="caret"></span>
+    </div>
+
+    <div ng-if="selectedJobs.length > 2" popover-placement="bottom"
+            popover-placement="bottom" popover-html-unsafe="{{unsafeHtml}}" popover-append-to-body="false" popover-trigger="click"
+            class="ml-job-select-btn" tooltip="{{selectedJobs[0].id}} and {{selectedJobs.length-1}} other jobs selected" ng-click='createUnsafeHtml()'>
+      <span class="ml-job-select-btn-text"><span>{{selectedJobs[0].id}}</span> and {{selectedJobs.length-1}} others</span>
+      <span class="caret"></span>
+    </div>
+  </div>
+</div>
