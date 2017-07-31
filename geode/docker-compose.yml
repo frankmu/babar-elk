@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  locator:
+    build: 
+      context: ./geode
+    image: frank/geode
+    container_name: locator
+    ports:
+      - "1099:1099"
+      - "10334:10334"
+      - "7575:7575"
+    volumes:
+      - ./geode/scripts:/scripts/
+    tty: true
+    command: /scripts/gfshWrapper.sh gfsh start locator --name=locator --mcast-port=0
+  server:
+    build:
+      context: ./geode
+    image: frank/geode
+    container_name: server
+    mem_limit: 2g
+    depends_on:
+      - locator
+    ports:
+      - "40404:40404"
+    volumes:
+      - ./geode/scripts:/scripts/
+    command: /scripts/startServer.sh --server-port=40404 --max-heap=1G

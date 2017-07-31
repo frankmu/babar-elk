@@ -6,6 +6,8 @@ services:
       context: ./flume
     image: frank/flume
     container_name: flume
+    volumes:
+      - /tmp/testFile.log:/tmp/testFile.log
     environment:
       FLUME_CONF_FILE: /opt/flume/conf/flume.conf
       FLUME_AGENT_NAME: agent

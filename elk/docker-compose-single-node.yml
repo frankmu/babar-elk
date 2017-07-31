@@ -1,0 +1,61 @@
+version: '2'
+services:
+  elasticsearch1:
+    build: elasticsearch/
+    image: frank/elasticsearch
+    container_name: elasticsearch1
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    mem_limit: 1g
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - esdata1:/opt/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+
+  logstash:
+    build: logstash/
+    image: frank/logstash
+    container_name: logstash
+    ports:
+      - "5000:5000"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - esnet
+    depends_on:
+      - elasticsearch1
+
+  kibana: 
+    build: kibana/
+    image: frank/kibana
+    container_name: kibana  
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      - esnet
+    depends_on:
+      - elasticsearch1
+
+volumes:
+  esdata1:
+    driver: local
+
+networks:
+  esnet:
+    driver: bridge
