@@ -31,9 +31,9 @@ module.exports = function (kibana) {
       hacks: ['plugins/kibana/dev_tools/hacks/hide_empty_tools'],
       app: {
         id: 'kibana',
-        title: 'Kibana',
+        title: 'OMC',
         listed: false,
-        description: 'the kibana you know and love',
+        description: 'the OMC you know and love',
         main: 'plugins/kibana/kibana',
         uses: [
           'visTypes',
