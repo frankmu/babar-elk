@@ -1,6 +1,0 @@
-server:
-  port: 8274
-logging:
-  json: true
-optimize:
-  enabled: false
